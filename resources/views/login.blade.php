@@ -16,13 +16,9 @@
             <span class="fa fa-lock form-control-feedback"></span>
         </div>
         <div class="row">
-            <!-- /.col -->
             <div class="col-xs-12 pull-right">
                 <button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
             </div>
-            <!-- /.col -->
         </div>
-
     </form>
-
 @endsection

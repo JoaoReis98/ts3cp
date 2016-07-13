@@ -49,5 +49,7 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Foundation\Http\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'checklogged' => \App\Http\Middleware\CheckLogged::class,
+        'UserOwnsVirtualServer' => \App\Http\Middleware\UserOwnsVirtualServer::class,
     ];
 }

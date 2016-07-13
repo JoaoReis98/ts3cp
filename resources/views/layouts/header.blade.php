@@ -2,7 +2,7 @@
 <header class="main-header">
 
     <!-- Logo -->
-    <a href="" class="logo">
+    <a href="{{ URL::Route('dashboard') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>TS</b>3</span>
         <!-- logo for regular state and mobile devices -->
@@ -23,30 +23,25 @@
                 <li class="dropdown user user-menu">
                     <!-- Menu Toggle Button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <!-- The user image in the navbar-->
-                        <img src="" class="user-image" alt="User Image">
-                        <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                        <span class="hidden-xs">ADSD</span>
+                        <img src="https://www.gravatar.com/avatar/{{ trim(md5($logged->email)) }}?s=160&r=pg&d=mm" class="user-image" alt="User Image">
+                        <span class="hidden-xs">{{ $logged->username }}</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <!-- The user image in the menu -->
                         <li class="user-header">
-                            <img src="" class="img-circle" alt=" Avatar">
+                            <img src="https://www.gravatar.com/avatar/{{ trim(md5($logged->email)) }}?s=160&r=pg&d=mm" class="img-circle" alt=" Avatar">
 
                             <p>
 
                                 <small>Member since </small>
                             </p>
                         </li>
-                        <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="col-xs-12">
-                                <a href="" class="btn btn-default col-xs-12 btn-flat">Logout</a>
+                                <a href="{{URL::Route('auth_logout')}}" class="btn btn-default col-xs-12 btn-flat">Logout</a>
                             </div>
                         </li>
                     </ul>
                 </li>
-                <!-- Control Sidebar Toggle Button -->
             </ul>
         </div>
     </nav>

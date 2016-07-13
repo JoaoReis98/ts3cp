@@ -16,6 +16,7 @@
         "symfony/dom-crawler": "2.8.*|3.0.*"
     },
     "autoload": {
+        "files": ["app/libraries/TeamSpeak3/Ts3admin.php"],
         "classmap": [
             "database"
         ],

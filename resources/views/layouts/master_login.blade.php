@@ -6,28 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <script type="text/javascript" src="http://laravel.dev/ts3/resources/assets/js/jQuery-2.2.0.min.js"></script>
-    <script type="text/javascript" src="http://laravel.dev/ts3/resources/assets/js/pace.min.js"></script>
+    <script type="text/javascript" src="{{URL::asset('assets/js/jQuery-2.2.0.min.js')}}"></script>
+    <script type="text/javascript" src="{{URL::asset('assets/js/pace.min.js')}}"></script>
 
 
-    <link rel="stylesheet" type="text/css" href="http://laravel.dev/ts3/resources/assets/css/layout.css" />
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('assets/css/layout.css')}}" />
 
     <link rel="stylesheet" type="text/css" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
 
-    <link rel="stylesheet" type="text/css" href="http://laravel.dev/ts3/resources/assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('assets/css/bootstrap.css')}}" />
 
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" />
 
-    <link rel="stylesheet" type="text/css" href="http://laravel.dev/ts3/resources/assets/css/all_skins.css" />
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('assets/css/all_skins.css')}}" />
 
-    <link rel="stylesheet" type="text/css" href="http://laravel.dev/ts3/resources/assets/css/pace.css" />
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('assets/css/pace.css')}}" />
 
 
-    <script type="text/javascript" src="http://laravel.dev/ts3/resources/assets/js/jquery.slimscroll.min.js"></script>
+    <script type="text/javascript" src="{{URL::asset('assets/js/jquery.slimscroll.min.js')}}"></script>
 
-    <script type="text/javascript" src="http://laravel.dev/ts3/resources/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{URL::asset('assets/js/bootstrap.min.js')}}"></script>
 
-    <script type="text/javascript" src="http://laravel.dev/ts3/resources/assets/js/app.min.js"></script>
+    <script type="text/javascript" src="{{URL::asset('assets/js/app.min.js')}}"></script>
 
 </head>
 <body class="hold-transition login-page">

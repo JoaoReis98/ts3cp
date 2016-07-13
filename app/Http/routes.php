@@ -16,6 +16,7 @@ Route::get('/auth/login', ['as' => 'auth_login', function () {
     if(Auth::check()) return redirect()->route('dashboard');
     return view('login');
 }]);
+
 Route::get('/auth/logout', ['as' => 'auth_logout', function () {
     Auth::logout();
     return redirect()->route('auth_login');
@@ -23,8 +24,32 @@ Route::get('/auth/logout', ['as' => 'auth_logout', function () {
 
 Route::post('/auth/login', ['as' => 'auth_login', 'uses' => 'Controller@login']);
 
-Route::get('/', ['as' => 'dashboard', function () {
-    if( ! Auth::check()) return redirect()->route('auth_login');
+Route::group(['middleware' => ['checklogged']], function () {
 
-    return view('welcome')->with(array('username' => 'ze Augusto'));
-}]);
+    Route::get('/',
+        [
+            'as'        => 'dashboard',
+            'uses'      => 'Controller@dashboard_main'
+        ]);
+
+    Route::get('servers',
+        [
+            'as' => 'servers',
+            'uses' => 'Controller@servers_view'
+        ]);
+
+    Route::get('server/{id}',
+        [
+            'as'    => 'server',
+            'uses'  => 'Controller@dashboard_server'
+        ])->where(['id' => '[0-9]+']);
+
+    Route::get('virtualserver/{id}',
+        [
+            'as'    => 'virtualserver_view',
+            'uses'  => 'Controller@virtualserver_view'
+        ])->middleware(['UserOwnsVirtualServer'])->where(['id' => '[0-9]+']);
+
+});
+
+
