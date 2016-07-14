@@ -39,6 +39,7 @@
 
 
     <script type="text/javascript" src="{{URL::asset('assets/js/jquery.slimscroll.min.js')}}"></script>
+    <script type="text/javascript" src="{{URL::asset('assets/js/jquery.nicescroll.min.js')}}"></script>
 
     <script type="text/javascript" src="{{URL::asset('assets/js/bootstrap.min.js')}}"></script>
 
@@ -92,8 +93,9 @@
                     <small>Control Panel</small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                    <li class="active">Main</li>
+                    @foreach ($breads as $br)
+                        <li class="{{ ($br['is_active']==true) ? 'active': '' }}"><a href="{{ $br['url'] }}"><i class="fa fa-{{ $br['icon'] }}"></i> {{ $br['title'] }}</a></li>
+                    @endforeach
                 </ol>
             </section>
 
@@ -106,6 +108,7 @@
 
 
 
+        <div class="clearfix"></div>
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
                 João Reis
@@ -123,6 +126,8 @@
                 $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
                 //Money Euro
                 $("[data-mask]").inputmask();
+                $("html").niceScroll();
+                $(".scroll").niceScroll();
             });
         </script>
     </div>

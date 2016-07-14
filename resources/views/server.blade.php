@@ -11,7 +11,7 @@
 
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="info-box bg-{{ ($virtual_server->server->success != false) ? 'green' : 'red' }}">
-                    <a class="remove-link-color" href="{{ ($virtual_server->server->success != false) ? URL::Route('virtualserver_view', $virtual_server->server->id) : '#' }}"><span class="info-box-icon"><i class="fa fa-expand"></i></span></a>
+                    <a class="remove-link-color" href="{{ ($virtual_server->server->success != false) ? URL::Route('virtualserver_view', $virtual_server->id) : '#' }}"><span class="info-box-icon"><i class="fa fa-expand"></i></span></a>
 
                     <div class="info-box-content">
                         <span class="info-box-text">{{ $virtual_server->serverInfo['virtualserver_name'] }}</span>

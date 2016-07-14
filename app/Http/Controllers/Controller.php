@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Server;
 use App\VirtualServer;
+use Illuminate\Support\Facades\URL;
+use DB;
 
 class Controller extends BaseController
 {
@@ -28,24 +30,26 @@ class Controller extends BaseController
 
     public function dashboard_main(Request $request)
     {
-        /*
-        $ts3_VirtualServer = new \App\VirtualServer();
-        $ts3_VirtualServer = $ts3_VirtualServer->find(array('id' => 1))->first();
-        $ts3_VirtualServer->connect();
-        */
         $servers = new Server();
         $servers = $servers->all();
-        return view('dashboard')->withLogged(Auth::User())->withServers($servers);
+        $breads = array(
+            array('url' => "#", 'is_active' => true, 'icon' => 'dashboard', 'title' => 'Dashboard')
+        );
+        return view('dashboard')->withLogged(Auth::User())->withServers($servers)->withBreads($breads);
     }
 
     public function dashboard_server(Request $request)
     {
+        $breads = array(
+            array('url' => Url::Route('dashboard'), 'is_active' => false, 'icon' => 'dashboard', 'title' => 'Dashboard'),
+            array('url' => "#", 'is_active' => true, 'icon' => 'server', 'title' => 'Server'),
+        );
+        
         $servers = new Server();
         $server = $servers->find(array('id' => $request->id))->first();
-        $virtual_servers = new VirtualServer();
-        $virtual_servers = $virtual_servers->find(array('server_id' => $server->id));
-        $virtual_servers = $virtual_servers->all();
-        return view('server')->withLogged(Auth::User())->withServer($server)->withVirtualServers($virtual_servers);
+        $virtual_servers = VirtualServer::where('server_id', $server->id)->get();
+
+        return view('server')->withLogged(Auth::User())->withServer($server)->withVirtualServers($virtual_servers)->withBreads($breads);
     }
 
     public function virtualserver_view(Request $request)
@@ -53,14 +57,55 @@ class Controller extends BaseController
         $virtual_servers = new VirtualServer();
         $virtual_server = $virtual_servers->find(array('id' => $request->id));
         $virtual_server = $virtual_server->first();
-        return view('virtualserver_view')->withLogged(Auth::User())->withVirtualServer($virtual_server);
+
+        $breads = array(
+            array('url' => Url::Route('dashboard'), 'is_active' => false, 'icon' => 'dashboard', 'title' => 'Dashboard'),
+            array('url' => Url::Route('servers'), 'is_active' => true, 'icon' => 'server', 'title' => 'Servers'),
+            array('url' => Url::Route('server', $virtual_server->server_id), 'is_active' => false, 'icon' => 'server', 'title' => 'Server'),
+            array('url' => "#", 'is_active' => true, 'icon' => 'server', 'title' => 'Virtual Server'),
+        );
+
+        return view('virtualserver_view')->withLogged(Auth::User())->withVirtualServer($virtual_server)->withBreads($breads);
     }
 
     public function servers_view(Request $request)
     {
+
+        $breads = array(
+            array('url' => Url::Route('dashboard'), 'is_active' => false, 'icon' => 'dashboard', 'title' => 'Dashboard'),
+            array('url' => "#", 'is_active' => true, 'icon' => 'server', 'title' => 'Servers'),
+        );
+
         $servers = new Server();
         $servers = $servers->all();
-        return view('servers_view')->withLogged(Auth::User())->withServers($servers);
+        return view('servers_view')->withLogged(Auth::User())->withServers($servers)->withBreads($breads);
+    }
+
+    public function my_virtualservers(Request $request)
+    {
+        $breads = array(
+            array('url' => Url::Route('dashboard'), 'is_active' => false, 'icon' => 'dashboard', 'title' => 'Dashboard'),
+            array('url' => "#", 'is_active' => false, 'icon' => 'star', 'title' => 'My Zone'),
+            array('url' => "#", 'is_active' => true, 'icon' => 'server', 'title' => 'Virtual Servers'),
+        );
+        $groups = DB::table('group_users_virtualservers')->where(array('user_id' => Auth::User()->id))->get();
+
+        $virtual_servers = array();
+        foreach($groups as $group)
+        {
+            $virtual_servers[] = VirtualServer::where('id', $group->virtualserver_id)->get()->first();
+        }
+
+        return view('server')->withLogged(Auth::User())->withVirtualServers($virtual_servers)->withBreads($breads);
+    }
+
+    public function client_kick(Request $request)
+    {
+        $virtualserver = VirtualServer::where(array('id' => $request->id))->get()->first();
+        $virtualserver->connect();
+        $virtualserver->instance->clientKick($request->clid, 'server', $request->description);
+        return redirect()->back();
+        #return view('server')->withLogged(Auth::User())->withVirtualServers($virtual_servers)->withBreads($breads);
     }
 
 }

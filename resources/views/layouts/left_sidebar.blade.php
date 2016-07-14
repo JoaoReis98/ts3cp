@@ -19,16 +19,24 @@
             <li class="header">Menu</li>
             <!-- Optionally, you can add icons to the links -->
             <li><a href="{{ URL::Route('dashboard') }}"><i class="fa fa-home"></i> <span>Home</span></a></li>
-            <li class="treeview">
-                <a href="#"><i class="fa fa-cog"></i> <span>Management</span> <i class="fa fa-angle-left pull-right"></i></a>
-                <ul class="treeview-menu">
-                    <li><a href="{{ URL::Route('servers') }}"><i class="fa fa-server"></i> <span>Servers</span></a></li>
-                    <li><a href=""><i class="fa fa-server"></i> <span>Series</span></a></li>
-                    <li><a href=""><i class="fa fa-tags"></i> <span>Categories</span></a></li>
-                    <li><a href=""><i class="fa fa-rss"></i> <span>Channels</span></a></li>
-                </ul>
-            </li>
-            <li><a href="{{URL::Route('auth_logout')}}"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
+
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-star"></i> <span>My Zone</span> <i class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ URL::Route('servers') }}"><i class="fa fa-server"></i> <span>Servers</span></a></li>
+                        <li><a href="{{ URL::Route('my_virtualservers') }}"><i class="fa fa-server"></i> <span>Virtual Servers</span></a></li>
+                    </ul>
+                </li>
+            @if($logged->level > 0)
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-cog"></i> <span>Admin</span> <i class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ URL::Route('admin_servers') }}"><i class="fa fa-server"></i> <span>Servers</span></a></li>
+                        <li><a href="{{ URL::Route('admin_users') }}"><i class="fa fa-users"></i> <span>Users</span></a></li>
+                    </ul>
+                </li>
+            @endif
+            <li><a href="{{ URL::Route('auth_logout') }}"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
         </ul>
         <!-- /.sidebar-menu -->
     </section>

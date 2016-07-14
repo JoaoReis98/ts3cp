@@ -42,7 +42,7 @@
 
 
     </div>
-
+    <div class="clearfix"></div>
     <footer class="main-footer" style="margin-left: 0; position: absolute; bottom: 0px; width: 100%;">
         <div class="pull-right hidden-xs">
             João Reis

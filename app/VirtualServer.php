@@ -56,7 +56,7 @@ class VirtualServer extends Model
             $tmp = $this->server->instance->clientInfo($client['clid'])['data'];
             $tmp_im = $this->server->instance->clientAvatar($tmp['client_unique_identifier'])['data'];
             if(empty($tmp_im)) $tmp_im = NULL;
-            $tmp = array_merge($tmp, array("client_avatar" => $tmp_im ));
+            $tmp = array_merge($tmp, array("client_avatar" => $tmp_im, "clid" => $client['clid']));
             $clients[] = $tmp;
         }
         return $clients;
