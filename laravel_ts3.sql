@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 13, 2016 at 06:35 PM
+-- Generation Time: Jul 14, 2016 at 04:27 PM
 -- Server version: 5.5.49-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.17
 
@@ -67,8 +67,8 @@ CREATE TABLE IF NOT EXISTS `servers` (
 --
 
 INSERT INTO `servers` (`id`, `hostname`, `ip`, `port`, `username`, `password`, `created_at`, `updated_at`) VALUES
-(1, 'Teste', '127.0.0.1', '10011', 'serveradmin', 'UGeodoHT', '2016-07-13 04:48:06', NULL),
-(2, 'Outro', 'localhost', '10011', 'serveradmin', 'UGeodoHT', '2016-07-13 05:09:29', NULL);
+(1, 'Teste', '127.0.0.1', '10011', 'serveradmin', '123', '2016-07-13 04:48:06', NULL),
+(2, 'Outro', 'localhost', '10011', 'serveradmin', '123', '2016-07-13 05:09:29', NULL);
 
 -- --------------------------------------------------------
 
@@ -84,6 +84,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL,
   `remember_token` varchar(64) DEFAULT NULL,
+  `level` int(2) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
@@ -92,9 +93,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `password`, `created_at`, `updated_at`, `remember_token`) VALUES
-(1, 'João Reis', 'joaoreis@outlook.pt', '$2y$10$WHIq4YEqUY34C/4v7EhleeeQ0/PYstm/Xc/N99WTguwkmlcmTHfO.', '2016-07-13 17:18:59', '2016-07-13 15:00:36', 'yEJGeNrMpf0mbDWcZAe8pzIaz6HcaMs8QjNovB4hDk1Uct3hWTCEUB35I5Qt'),
-(2, 'Hardcorder', 'hardcorder@hotmail.com', '$2y$10$WHIq4YEqUY34C/4v7EhleeeQ0/PYstm/Xc/N99WTguwkmlcmTHfO.', '2016-07-13 17:18:59', '2016-07-13 12:24:19', 'LvEvy8EiRxczpvUZ6SstiqSdukvZGvQ1sxpa0ho0Zmgut5avHeW7A1ifhRV8');
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `created_at`, `updated_at`, `remember_token`, `level`) VALUES
+(1, 'João Reis', 'joaoreis@outlook.pt', '$2y$10$WHIq4YEqUY34C/4v7EhleeeQ0/PYstm/Xc/N99WTguwkmlcmTHfO.', '2016-07-13 17:18:59', '2016-07-13 15:00:36', 'yEJGeNrMpf0mbDWcZAe8pzIaz6HcaMs8QjNovB4hDk1Uct3hWTCEUB35I5Qt', 1),
+(2, 'Hardcorder', 'hardcorder@hotmail.com', '$2y$10$WHIq4YEqUY34C/4v7EhleeeQ0/PYstm/Xc/N99WTguwkmlcmTHfO.', '2016-07-13 17:18:59', '2016-07-13 12:24:19', 'LvEvy8EiRxczpvUZ6SstiqSdukvZGvQ1sxpa0ho0Zmgut5avHeW7A1ifhRV8', 0);
 
 -- --------------------------------------------------------
 
@@ -118,7 +119,7 @@ CREATE TABLE IF NOT EXISTS `virtual_servers` (
 
 INSERT INTO `virtual_servers` (`id`, `server_id`, `port`, `max_slots`, `created_at`, `updated_at`) VALUES
 (1, 1, '9987', 32, '2016-07-13 13:16:22', NULL),
-(2, 2, '9987', 32, '2016-07-13 09:41:24', NULL);
+(2, 1, '9988', 512, '2016-07-13 09:41:24', NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
