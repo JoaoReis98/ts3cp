@@ -30,6 +30,7 @@ class VirtualServer extends Model
 
     public $serverInfo = NULL;
     public $hostInfo = NULL;
+    public $success = false;
 
     public function connect()
     {
@@ -39,9 +40,12 @@ class VirtualServer extends Model
 
         if($this->server->instance == NULL) throw new \Exception('Server offline!');
         $this->instance = $this->server->instance;
+        $old = count($this->instance->getDebugLog());
         $this->instance->selectServer($this->port, 'port', false);
         $this->serverInfo = $this->instance->serverInfo()['data'];
         $this->hostInfo = $this->instance->hostInfo()['data'];
+        $new = count($this->instance->getDebugLog());
+        if($old == $new) $this->success = true;
     }
 
 
@@ -72,5 +76,12 @@ class VirtualServer extends Model
     {
         if($this->instance === NULL) $this->connect();
         return $this->serverInfo['virtualserver_maxclients'];
+    }
+
+    public function viewLogs()
+    {
+        if($this->instance === NULL) $this->connect();
+        return $this->instance->logView(30, 1, 1, 0)['data'];
+
     }
 }
