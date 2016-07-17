@@ -41,11 +41,12 @@ class VirtualServer extends Model
         if($this->server->instance == NULL) throw new \Exception('Server offline!');
         $this->instance = $this->server->instance;
         $old = count($this->instance->getDebugLog());
-        $this->instance->selectServer($this->port, 'port', false);
+        $this->instance->selectServer($this->port, 'port', true);
         $this->serverInfo = $this->instance->serverInfo()['data'];
         $this->hostInfo = $this->instance->hostInfo()['data'];
         $new = count($this->instance->getDebugLog());
         if($old == $new) $this->success = true;
+        if($this->serverInfo['virtualserver_status'] == 'online') { $this->success = true; } else { $this->success = false; }
     }
 
 
@@ -58,7 +59,10 @@ class VirtualServer extends Model
             if($client['client_type'] != 0) continue;
             #echo
             $tmp = $this->server->instance->clientInfo($client['clid'])['data'];
-            $tmp_im = $this->server->instance->clientAvatar($tmp['client_unique_identifier'])['data'];
+            /**
+             * TODO: descomentar para retirar avatar, arranjar metodo de carregar avatares via ajax para pagina n demorar mt tempo a carregar
+             */
+            //$tmp_im = $this->server->instance->clientAvatar($tmp['client_unique_identifier'])['data'];
             if(empty($tmp_im)) $tmp_im = NULL;
             $tmp = array_merge($tmp, array("client_avatar" => $tmp_im, "clid" => $client['clid']));
             $clients[] = $tmp;

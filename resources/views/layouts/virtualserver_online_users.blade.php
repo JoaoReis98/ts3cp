@@ -46,7 +46,7 @@
                                     {{ csrf_field() }}
                                     {{ method_field('POST') }}
                                     <div class="form-group">
-                                        <input type="text" name="description" class="form-control" value="You have been kicked! From ts3cp.jreis.pt" />
+                                        <input type="text" name="description" class="form-control" value="You have been kicked!" />
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -85,8 +85,6 @@
     </div>
 
 
-
-
     <div class="modal fade" tabindex="-1" role="dialog" id="ban">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -105,11 +103,5 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-
-    <!-- /.box-body -->
-    <!--<div style="display: block;" class="box-footer text-center">
-        <a href="javascript:void(0)" class="uppercase">View All Users</a>
-    </div>-->
-    <!-- /.box-footer -->
 </div>
 <!--/.box -->

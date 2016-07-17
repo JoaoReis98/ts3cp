@@ -23,7 +23,6 @@
                 <li class="treeview">
                     <a href="#"><i class="fa fa-star"></i> <span>My Zone</span> <i class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ URL::Route('servers') }}"><i class="fa fa-server"></i> <span>Servers</span></a></li>
                         <li><a href="{{ URL::Route('my_virtualservers') }}"><i class="fa fa-server"></i> <span>Virtual Servers</span></a></li>
                     </ul>
                 </li>

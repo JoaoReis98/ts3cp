@@ -38,19 +38,6 @@ class Controller extends BaseController
         return view('dashboard')->withLogged(Auth::User())->withServers($servers)->withBreads($breads);
     }
 
-    public function dashboard_server(Request $request)
-    {
-        $breads = array(
-            array('url' => Url::Route('dashboard'), 'is_active' => false, 'icon' => 'dashboard', 'title' => 'Dashboard'),
-            array('url' => "#", 'is_active' => true, 'icon' => 'server', 'title' => 'Server'),
-        );
-        
-        $servers = new Server();
-        $server = $servers->find(array('id' => $request->id))->first();
-        $virtual_servers = VirtualServer::where('server_id', $server->id)->get();
-
-        return view('server')->withLogged(Auth::User())->withServer($server)->withVirtualServers($virtual_servers)->withBreads($breads);
-    }
 
     public function virtualserver_view(Request $request)
     {
@@ -60,26 +47,12 @@ class Controller extends BaseController
 
         $breads = array(
             array('url' => Url::Route('dashboard'), 'is_active' => false, 'icon' => 'dashboard', 'title' => 'Dashboard'),
-            array('url' => Url::Route('servers'), 'is_active' => true, 'icon' => 'server', 'title' => 'Servers'),
-            array('url' => Url::Route('server', $virtual_server->server_id), 'is_active' => false, 'icon' => 'server', 'title' => 'Server'),
             array('url' => "#", 'is_active' => true, 'icon' => 'server', 'title' => 'Virtual Server'),
         );
 
         return view('virtualserver_view')->withLogged(Auth::User())->withVirtualServer($virtual_server)->withBreads($breads);
     }
 
-    public function servers_view(Request $request)
-    {
-
-        $breads = array(
-            array('url' => Url::Route('dashboard'), 'is_active' => false, 'icon' => 'dashboard', 'title' => 'Dashboard'),
-            array('url' => "#", 'is_active' => true, 'icon' => 'server', 'title' => 'Servers'),
-        );
-
-        $servers = new Server();
-        $servers = $servers->all();
-        return view('servers_view')->withLogged(Auth::User())->withServers($servers)->withBreads($breads);
-    }
 
     public function my_virtualservers(Request $request)
     {

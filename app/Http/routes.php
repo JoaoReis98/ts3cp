@@ -35,22 +35,7 @@ Route::group(['middleware' => ['CheckLogged']], function () {
             'as'        => 'dashboard',
             'uses'      => 'Controller@dashboard_main'
         ]);
-    /**
-     * Servers
-     */
-    Route::get('servers',
-        [
-            'as' => 'servers',
-            'uses' => 'Controller@servers_view'
-        ]);
-    /**
-     * Single Server
-     */
-    Route::get('server/{id}',
-        [
-            'as'    => 'server',
-            'uses'  => 'Controller@dashboard_server'
-        ])->where(['id' => '[0-9]+']);
+
     /**
      * Virtual Server
      */
@@ -76,7 +61,7 @@ Route::group(['middleware' => ['CheckLogged']], function () {
      * my_virtualservers
      */
 
-    Route::get('my_virtualservers',
+    Route::get('my/virtualservers',
         [
             'as'    => 'my_virtualservers',
             'uses'  => 'Controller@my_virtualservers'
@@ -104,11 +89,19 @@ Route::group(['middleware' => ['CheckLogged']], function () {
         /**
          * Servers
          */
-        Route::get('servers', [
-            'as'        => 'admin_servers',
-            'uses'      => 'Admin@servers'
-        ]);
-
+        Route::get('servers',
+            [
+                'as' => 'admin_servers',
+                'uses' => 'Admin@servers_view'
+            ]);
+        /**
+         * Single Server
+         */
+        Route::get('server/{id}',
+            [
+                'as'    => 'admin_server',
+                'uses'  => 'Admin@dashboard_server'
+            ])->where(['id' => '[0-9]+']);
         /**
          * Single User
          */

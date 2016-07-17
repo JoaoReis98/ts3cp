@@ -80,7 +80,7 @@
         color: inherit !important;
     }
 </style>
-<body class="hold-transition skin-red sidebar-mini fixed">
+<body class="hold-transition skin-green sidebar-mini fixed">
     <div class="wrapper">
         @include('layouts.header')
         @include('layouts.left_sidebar')

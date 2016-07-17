@@ -11,7 +11,7 @@
 
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="info-box bg-{{ ($server->success != false) ? 'green' : 'red' }}">
-                    <a class="remove-link-color" href="{{ ($server->success != false) ? URL::Route('server', $server->id) : '#' }}"><span class="info-box-icon"><i class="fa fa-{{ ($server->success != false) ? strtolower($server->version['platform']) : 'server' }}"></i></span></a>
+                    <a class="remove-link-color" href="{{ ($server->success != false) ? URL::Route('admin_server', $server->id) : '#' }}"><span class="info-box-icon"><i class="fa fa-{{ ($server->success != false) ? strtolower($server->version['platform']) : 'server' }}"></i></span></a>
 
                     <div class="info-box-content">
                         <span class="info-box-text">{{ $server->hostname }}</span>
