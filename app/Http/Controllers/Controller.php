@@ -76,9 +76,24 @@ class Controller extends BaseController
     {
         $virtualserver = VirtualServer::where(array('id' => $request->id))->get()->first();
         $virtualserver->connect();
-        $virtualserver->instance->clientKick($request->clid, 'server', $request->description);
+        $virtualserver->instance->clientKick($request->clid, 'server', $request->reason);
         return redirect()->back();
-        #return view('server')->withLogged(Auth::User())->withVirtualServers($virtual_servers)->withBreads($breads);
+    }
+
+    public function client_ban(Request $request)
+    {
+        $virtualserver = VirtualServer::where(array('id' => $request->id))->get()->first();
+        $virtualserver->connect();
+        $virtualserver->instance->banClient($request->clid, $request->time, $request->reason);
+        return redirect()->back();
+    }
+
+    public function client_message(Request $request)
+    {
+        $virtualserver = VirtualServer::where(array('id' => $request->id))->get()->first();
+        $virtualserver->connect();
+        $virtualserver->instance->sendMessage(1, $request->clid, $request->message);
+        return redirect()->back();
     }
 
 }

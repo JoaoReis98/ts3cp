@@ -55,6 +55,8 @@ Route::group(['middleware' => ['CheckLogged']], function () {
             ]);
 
         Route::post('kick/{clid}', ['as' => 'client_kick', 'uses' => 'Controller@client_kick']);
+        Route::post('ban/{clid}', ['as' => 'client_ban', 'uses' => 'Controller@client_ban']);
+        Route::post('message/{clid}', ['as' => 'client_message', 'uses' => 'Controller@client_message']);
 
     });
     /**

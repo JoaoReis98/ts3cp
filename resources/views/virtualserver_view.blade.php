@@ -6,7 +6,6 @@
     @include('common.errors')
     <div class="row">
         {{ $virtual_server->connect() }}
-        <pre>{{ print_r($virtual_server) }}</pre>
         <h2></h2>
         <div class="col-md-6">
             @include('layouts.virtualserver_main_panel')

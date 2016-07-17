@@ -28,7 +28,7 @@
                             <li role="presentation"><a type="button" data-toggle="modal" data-target="#kick_{{ $client['clid'] }}" user-uid="1" role="menuitem" tabindex="-1" href="#">Kick</a></li>
                             <li role="presentation"><a type="button" data-toggle="modal" data-target="#ban_{{ $client['clid'] }}" user-uid="1" role="menuitem" tabindex="-1" href="#">Ban</a></li>
                             <li role="presentation" class="divider"></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Send Message</a></li>
+                            <li role="presentation"><a type="button" data-toggle="modal" data-target="#msg_{{ $client['clid'] }}" role="menuitem" tabindex="-1" href="#">Send Message</a></li>
                         </ul>
                     </div>
                     <span class="users-list-date"><i class="fa fa-circle" style="color: green;"></i> Online</span>
@@ -46,7 +46,7 @@
                                     {{ csrf_field() }}
                                     {{ method_field('POST') }}
                                     <div class="form-group">
-                                        <input type="text" name="description" class="form-control" value="You have been kicked!" />
+                                        <input type="text" name="reason" class="form-control" value="You have been kicked!" />
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -65,13 +65,45 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 <h4 class="modal-title">Ban</h4>
                             </div>
-                            <div class="modal-body">
-                                <p>One fine body&hellip;</p>
+                            <form action="{{ URL::Route('client_ban', array($virtual_server->id, $client['clid'])) }}" method="POST">
+                                <div class="modal-body">
+                                    {{ csrf_field() }}
+                                    {{ method_field('POST') }}
+                                    <div class="form-group">
+                                        <input type="number" name="time" class="form-control" value="0" />
+                                        <input type="text" name="reason" class="form-control" value="You have been banned!" />
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <input type="submit" class="btn btn-primary" value="Ban">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal fade" tabindex="-1" role="dialog" id="msg_{{ $client['clid'] }}">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Message</h4>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
+                            <form action="{{ URL::Route('client_message', array($virtual_server->id, $client['clid'])) }}" method="POST">
+                                <div class="modal-body">
+                                    {{ csrf_field() }}
+                                    {{ method_field('POST') }}
+                                    <div class="form-group">
+                                        <input type="text" name="message" class="form-control" value="Hey" />
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <input type="submit" class="btn btn-primary" value="Send">
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
