@@ -95,7 +95,6 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `created_at`, `updated_at`, `remember_token`, `level`) VALUES
 (1, 'João Reis', 'joaoreis@outlook.pt', '$2y$10$WHIq4YEqUY34C/4v7EhleeeQ0/PYstm/Xc/N99WTguwkmlcmTHfO.', '2016-07-13 17:18:59', '2016-07-13 15:00:36', 'yEJGeNrMpf0mbDWcZAe8pzIaz6HcaMs8QjNovB4hDk1Uct3hWTCEUB35I5Qt', 1),
-(2, 'Hardcorder', 'hardcorder@hotmail.com', '$2y$10$WHIq4YEqUY34C/4v7EhleeeQ0/PYstm/Xc/N99WTguwkmlcmTHfO.', '2016-07-13 17:18:59', '2016-07-13 12:24:19', 'LvEvy8EiRxczpvUZ6SstiqSdukvZGvQ1sxpa0ho0Zmgut5avHeW7A1ifhRV8', 0);
 
 -- --------------------------------------------------------
 
